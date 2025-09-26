@@ -1,0 +1,31 @@
+exchange: binance
+timeframe: 5m
+symbols:
+- COIN50
+strategy:
+  ema_period: 20
+  bb_period: 20
+  bb_std: 2.0
+  rsi_period: 14
+  adx_period: 14
+  adx_max: 20
+  use_htf_filter: true
+  htf_timeframe: 1h
+  htf_rsi_overbought: 70
+  htf_rsi_oversold: 30
+risk:
+  risk_per_trade: 0.0075
+  max_daily_loss_pct: 0.03
+  fee_rate: 0.0004
+  slippage: 0.0002
+  stop_buffer_pct: 0.003
+  scale_out: true
+  tp1_ratio: 0.5
+  tp2_to_mean: true
+  max_positions: 10
+  allocation_per_trade_cash: 1000
+backtest:
+  initial_equity: 10000
+  from_days_ago: 120
+forward:
+  poll_seconds: 15

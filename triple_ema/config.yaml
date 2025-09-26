@@ -1,0 +1,26 @@
+exchange: binance
+timeframe: 5m
+symbols:
+- COIN50
+strategy:
+  ema_short: 9
+  ema_mid: 21
+  ema_long: 55
+  momentum_lookback_bars: 2016
+  top_n: 5
+  swing_lookback: 20
+  atr_period: 14
+  atr_mult: 2.0
+risk:
+  initial_equity: 10000
+  sizing_mode: risk_pct
+  risk_pct_per_trade: 0.02
+  fixed_cash_per_trade: 1000
+  max_positions: 10
+  fee_rate: 0.0004
+  slippage: 0.0002
+backtest:
+  from_days_ago: 180
+forward:
+  poll_seconds: 15
+  rank_interval_bars: 288
