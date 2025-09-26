@@ -1,0 +1,26 @@
+tmux new -s trading
+
+ctrl-b %
+
+cd mean_reversion
+python forward.py --universe COIN50 --exchange binance --verbose
+
+cd momentum
+python forward.py --universe COIN50 --exchange binance --verbose
+
+cd triple_ema
+python forward.py --universe COIN50 --exchange binance --verbose
+
+ctrl-b d
+
+tmux attach -t trading
+
+// OR //
+
+tmux new-session -d -s trading \
+  'cd mean_reversion && python forward.py --universe COIN50 --exchange binance --verbose' \; \
+  split-window -h \
+  'cd momentum && python forward.py --universe COIN50 --exchange binance --verbose' \; \
+  split-window -v \
+  'cd triple_ema && python forward.py --universe COIN50 --exchange binance --verbose' \; \
+  attach
