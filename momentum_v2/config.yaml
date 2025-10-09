@@ -1,21 +1,53 @@
-exchange: binance
-timeframe: 5m
-symbols:
-  - BTC/USDT
-  - ETH/USDT
+timeframe: "5m"
+exchange: "binance"
+
 strategy:
   ema_fast: 20
   ema_slow: 50
-  breakout_lookback: 50
-  require_breakout: true
-  pullback_after_breakout: false
+  rsi_period: 14
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+  atr_period: 14
+
+  regime_win: 500
+  zscore_win: 200
+  ema_slope_min: 0.0
   atrpct_pct_low: 0.15
   atrpct_pct_high: 0.95
-risk:
-  initial_equity: 10000
-  allocation_per_trade_cash: 1000
-  max_positions: 5
+
+  breakout_lookback: 50
+  volume_ma: 20
+  min_volume_ma_ratio: 1.15
+  obv_slope_min: 0.0
+  min_macd_hist_z: 0.0
+  require_breakout: true
+  pullback_after_breakout: false
+
+  rsi_long_min: 50
+  rsi_short_max: 50
+  allow_short: true
+
+  k_stop_atr: 1.5
+  tp1_atr: 1.0
+  trail_after_tp1_atr: 0.5
+  target_risk_frac: 0.004
+  max_bars_in_trade: 80
+  structure_stops: true
+  use_psar: false
   fee_rate: 0.0006
+
+risk:
+  allocation_per_trade_cash: 1000.0
+  max_positions: 10
+  fee_rate: 0.0006
+  slippage: 0.0002
   slippage_bps: 1.0
+  initial_equity: 10000.0
+
 forward:
   poll_seconds: 30
+  fetch_bars: 3000   # how many historical candles to pull at startup
+
+symbols:
+  - COIN50

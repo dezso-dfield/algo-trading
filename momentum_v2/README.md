@@ -1,40 +1,24 @@
+# momentum_trendedge
 
-# trendedge
+Momentum (trend-following) package with:
+- Symmetric long/short gate (EMA fast/slow, MACD vs signal, RSI)
+- Regime gates (ATR% percentiles, EMA slow slope; HTF hook ready)
+- Breakout + confirmation filter (prior high/low, vol vs MA, OBV slope, MACD-hist z-score)
+- Standardized score for ranking
+- ATR risk-unit sizing, TP1, trail, time stop, trend-invalidation exits
+- Conservative intrabar sequencing, fees & slippage accounted
+- Forward runner for COIN50 on Binance (CCXT)
 
-A portable, robust trend-following breakout strategy package.
-
-**Core ideas**
-- Trend bias (EMA fast/slow, MACD>signal, RSI threshold)
-- Symmetric long/short breakout entries with regime gates (volatility, slope, optional HTF)
-- Standardized scores (z-scores) for ranking
-- ATR risk-unit sizing, structured stops, TP1 partials, trailing, time stop
-- Conservative intrabar sequencing (adverse move first if both stop/TP hit)
-- Fees + slippage modeled
-- Data hygiene: warm-up, next-bar execution, completed bars only
-
-## Quick start
+## Quickstart
 
 ```bash
-pip install -e .
-trendedge backtest --csv examples/BTCUSDT_1h_sample.csv
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 forward_trendedge.py --universe COIN50 --exchange binance --config config.yaml --verbose
 ```
 
-Or use from Python:
-
-```python
-import pandas as pd
-from trendedge import data, backtest, params as default_params
-
-df = data.load_csv("examples/BTCUSDT_1h_sample.csv")
-df = data.prepare(df, default_params.PARAMS)
-equity, trades, stats = backtest.run(df, default_params.PARAMS)
-print(stats)
+Backtest a CSV with columns: `timestamp,open,high,low,close,volume`:
+```bash
+python3 backtest.py --csv path/to/BTCUSDT_5m.csv --config config.yaml
 ```
-
-## CSV format
-
-Required columns: `timestamp,open,high,low,close,volume` (UTC ISO8601 or epoch seconds).
-
-## Parameters
-
-See `trendedge/params.py` and override via CLI `--params path.json` or `--override key=value` (supports dotted keys).
