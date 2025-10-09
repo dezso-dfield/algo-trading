@@ -1,0 +1,21 @@
+exchange: binance
+timeframe: 5m
+symbols:
+  - BTC/USDT
+  - ETH/USDT
+strategy:
+  ema_fast: 20
+  ema_slow: 50
+  breakout_lookback: 50
+  require_breakout: true
+  pullback_after_breakout: false
+  atrpct_pct_low: 0.15
+  atrpct_pct_high: 0.95
+risk:
+  initial_equity: 10000
+  allocation_per_trade_cash: 1000
+  max_positions: 5
+  fee_rate: 0.0006
+  slippage_bps: 1.0
+forward:
+  poll_seconds: 30
